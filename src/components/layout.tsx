@@ -1,15 +1,10 @@
-import React, { FC } from "react"
-import { Link } from "gatsby"
+import React, { FC, ReactNode } from 'react';
 
 interface Props {
-  location: any;
-  title: any;
-  children: React.ReactNode;
+  children: ReactNode[];
 }
 
-const Layout: FC<Props> = ({ location, title, children }) => {
-  console.log(location);
-
+const Layout: FC<Props> = ({ children }) => {
   return (
     <div className="global-wrapper">
       <header className="global-header">
@@ -22,7 +17,7 @@ const Layout: FC<Props> = ({ location, title, children }) => {
         <a href="https://www.gatsbyjs.com">Gatsby</a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

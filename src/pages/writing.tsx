@@ -1,16 +1,11 @@
-import React, { FC } from "react"
-import { Link, graphql, PageProps } from "gatsby"
+import React, { FC } from 'react';
+import { Link, graphql, PageProps } from 'gatsby';
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Bio from '../components/bio';
+import Layout from '../components/layout';
+import SEO from '../components/seo';
 
 interface DataProps {
-  site: {
-    siteMetadata: {
-      title?: string;
-    }
-  }
   allMarkdownRemark: {
     nodes: {
       excerpt: string;
@@ -21,18 +16,17 @@ interface DataProps {
         date: string;
         title: string;
         description: string;
-      }
+      };
     }[];
-  }
+  };
 }
 
-const WritingPage: FC<PageProps<DataProps>> = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata?.title || 'Title'
-  const posts = data.allMarkdownRemark.nodes
+const WritingPage: FC<PageProps<DataProps>> = ({ data }) => {
+  const posts = data.allMarkdownRemark.nodes;
 
-  if (posts.length) {
+  if (!posts.length) {
     return (
-      <Layout location={location} title={siteTitle}>
+      <Layout>
         <SEO title="All posts" />
         <Bio />
         <p>
@@ -41,16 +35,16 @@ const WritingPage: FC<PageProps<DataProps>> = ({ data, location }) => {
           gatsby-config.js).
         </p>
       </Layout>
-    )
+    );
   }
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout>
       <SEO title="All posts" />
       <Bio />
       <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
-          const title = post.frontmatter.title || post.fields.slug
+        {posts.map((post) => {
+          const title = post.frontmatter.title || post.fields.slug;
 
           return (
             <li key={post.fields.slug}>
@@ -77,22 +71,17 @@ const WritingPage: FC<PageProps<DataProps>> = ({ data, location }) => {
                 </section>
               </article>
             </li>
-          )
+          );
         })}
       </ol>
     </Layout>
-  )
-}
+  );
+};
 
 export default WritingPage;
 
 export const pageQuery = graphql`
   query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       nodes {
         excerpt
@@ -107,4 +96,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
