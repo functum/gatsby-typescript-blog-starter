@@ -12,19 +12,19 @@ interface DataProps {
   }
 }
 
-const HomePage: FC<PageProps<DataProps>> = ({ data, location }) => {
+const AboutPage: FC<PageProps<DataProps>> = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="About" />
-      <h1>homepage</h1>
-      <p>this will be the home page</p>
+      <h1>About</h1>
+      <p>this will be the about page</p>
     </Layout>
   )
 }
 
-export default HomePage;
+export default AboutPage;
 
 export const pageQuery = graphql`
   query {
